@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario Validacion</title>
+</head>
+<
+    <label>Nombre:</label>
+    <input type="text" name="name" value="<?php echo $name; ?>">
+    <span style="color:red;"><?php echo $nameErr; ?></span>
+    <br><br>
+
+    <label>Email:</label>
+    <input type="text" name="email" value="<?php echo htmlspecialchars($email); ?>">
+    <span style="color:red;"><?php echo $emailErr; ?></span>
+    <br><br>
+
+    <label>URL:</label>
+    <input type="text" name="url" value="<?php echo htmlspecialchars($url); ?>">
+    <span style="color:red;"><?php echo $urlErr; ?></span>
+    <br><br>
+
+    <label>Comentario:</label>
+    <textarea name="comment"><?php echo htmlspecialchars($comment); ?></textarea>
+    <span style="color:red;"><?php echo $commentErr; ?></span>
+    <br><br>
+
+    <label>Cursos:</label><br>
+    <input type="checkbox" name="courses[]" value="HTML" <?php if(in_array("HTML", $courses)) echo "checked"; ?>> HTML<br>
+    <input type="checkbox" name="courses[]" value="CSS" <?php if(in_array("CSS", $courses)) echo "checked"; ?>> CSS<br>
+    <input type="checkbox" name="courses[]" value="JS" <?php if(in_array("JS", $courses)) echo "checked"; ?>> JS<br>
+    <span style="color:red;"><?php echo $coursesErr; ?></span>
+    <br><br>
+
+    <input type="submit" value="Enviar">
+</form>
+</body>
+</html>

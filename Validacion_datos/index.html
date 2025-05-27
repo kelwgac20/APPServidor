@@ -1,0 +1,118 @@
+<!--
+    forValidacion.html
+    Formulario con validación de campos requeridos y mensajes de error.
+    Incluye: Nombre, Email, URL, Comentario (textarea), y 3 checkboxes de cursos.
+    El formulario se procesa en el mismo archivo usando PHP.
+-->
+
+<?php
+// Inicializar variables y errores
+$nombre = $email = $url = $comment = "";
+$nombreErr = $emailErr = $urlErr = $commentErr = $cursosErr = "";
+$cursos = [];
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Validar Nombre
+    if (empty($_POST["nombre"])) {
+        $nombreErr = "Nombre requerido";
+    } else {
+        $nombre = test_input($_POST["nombre"]);
+        if (!preg_match("/^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]*$/", $nombre)) {
+            $nombreErr = "Solo letras y espacios";
+        }
+    }
+
+    // Validar Email
+    if (empty($_POST["email"])) {
+        $emailErr = "Email requerido";
+    } else {
+        $email = test_input($_POST["email"]);
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $emailErr = "Formato de email inválido";
+        }
+    }
+
+    // Validar URL
+    if (empty($_POST["url"])) {
+        $urlErr = "URL requerida";
+    } else {
+        $url = test_input($_POST["url"]);
+        if (!filter_var($url, FILTER_VALIDATE_URL)) {
+            $urlErr = "Formato de URL inválido";
+        }
+    }
+
+    // Validar Comentario
+    if (test_input($_POST["comment"]) == "") {
+        $commentErr = "Comentario requerido";
+    } else {
+        $comment = test_input($_POST["comment"]);
+    }
+
+    // Validar Checkboxes de Cursos
+    if (empty($_POST["cursos"])) {
+        $cursosErr = "Selecciona al menos un curso";
+    } else {
+        $cursos = $_POST["cursos"];
+    }
+}
+
+// Función para limpiar datos
+function test_input($data) {
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+}
+?>
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario con Validación</title>
+    <style>
+        .error { color: red; font-size: 0.9em; }
+        label { display: block; margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <h2>Formulario de Validación</h2>
+    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+        <!-- Campo Nombre -->
+        <label>Nombre:
+            <input type="text" name="nombre" value=">
+            <span class="error"><?php echo $nombreErr; ?></span>
+        </label>
+
+        <!-- Campo Email -->
+        <label>Email:
+            <input type="email" name="email" value="<?php echo htmlspecialchars($email); ?>">
+            <span class="error"><?php echo $emailErr; ?></span>
+        </label>
+
+        <!-- Campo URL -->
+        <label>URL:
+            <input type="url" name="url" value="<?php echo htmlspecialchars($url); ?>">
+            <span class="error"><?php echo $urlErr; ?></span>
+        </label>
+
+        <!-- Campo Comentario -->
+        <label>Comentario:
+            <textarea name="comment" rows="4" cols="40"><?php echo htmlspecialchars($comment); ?></textarea>
+            <span class="error"><?php echo $commentErr; ?></span>
+        </label>
+
+        <!-- Checkboxes de Cursos -->
+        <label>Cursos:
+            <input type="checkbox" name="cursos[]" value="HTML" <?php if(in_array("HTML", $cursos)) echo "checked"; ?>> HTML
+            <input type="checkbox" name="cursos[]" value="CSS" <?php if(in_array("CSS", $cursos)) echo "checked"; ?>> CSS
+            <input type="checkbox" name="cursos[]" value="JS" <?php if(in_array("JS", $cursos)) echo "checked"; ?>> JS
+            <span class="error"><?php echo $cursosErr; ?></span>
+        </label>
+
+        <br>
+        <input type="submit" value="Enviar">
+    </form>
+</body>
+</html>
