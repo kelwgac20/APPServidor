@@ -1,0 +1,79 @@
+/* Añadir noticia */
+
+       body {
+           font-family: Arial, sans-serif;
+           padding: 40px;
+       }
+
+        /* Style for error messages */
+        .error,
+        .success {
+            color: darkred;
+            /* Dark red color for error messages */
+            font-size: 14px;
+            margin-left: 10px;
+            font-style: italic;
+            flex-direction: column;
+        }
+
+        .success {
+            color: #4CAF50;
+        }
+
+/* Index. Listado de noticias */
+
+       .noticia {
+           margin-bottom: 20px;
+           border-bottom: 1px solid #ccc;
+           padding-bottom: 10px;
+       }
+       .noticia h2 {
+           margin: 0;
+       }
+       .noticia small {
+           color: #777;
+       }
+       .noticia a {
+           display: inline-block;
+           margin-top: 5px;
+           text-decoration: none;
+           color: #0077cc;
+       }
+    /* Noticia.php*/
+            .tarjeta {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #ccc;
+            font-family: sans-serif;
+        }
+
+        form {
+            width: 60%
+        }
+
+        /* Style the form inputs */
+        input[type="text"],
+        input[type="email"],
+        input[type="url"],
+        textarea {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }

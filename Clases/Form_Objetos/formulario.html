@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario de Persona</title>
+</head>
+<body>
+    <h2>Formulario de Registro</h2>
+    <form action="receptor.php" method="POST" enctype="multipart/form-data">
+        <label>Nombre completo:</label><br>
+        <input type="text" name="nombre" required><br><br>
+
+        <label>Email:</label><br>
+        <input type="email" name="email" required><br><br>
+
+        <label>Empleo:</label><br>
+        <input type="text" name="empleo" required><br><br>
+
+        <label>Titulación:</label><br>
+        <input type="text" name="titulacion" required><br><br>
+
+        <label>Comentario:</label><br>
+        <textarea name="comentario" rows="5" cols="30" required></textarea><br><br>
+
+        <label>Subir imagen (avatar):</label><br>
+        <input type="file" name="imagen" accept="image/*" required><br><br>
+
+        <input type="submit" value="Enviar">
+    </form>
+</body>
+</html>
